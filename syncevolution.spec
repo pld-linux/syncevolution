@@ -1,4 +1,5 @@
 Summary:	Synchronization for contacts and calendars for Evolution
+Summary(pl):	Synchronizacja kontaktów i kalendarzy dla Evolution
 Name:		syncevolution
 Version:	0.3
 Release:	0.1
@@ -13,6 +14,10 @@ BuildRequires:	evolution-data-server-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
+Synchronization for contacts and calendars for Evolution.
+
+%description -l pl
+Synchronizacja kontaktów i kalendarzy dla Evolution.
 
 %prep
 %setup -q
