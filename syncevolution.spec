@@ -1,5 +1,5 @@
 Summary:	Synchronization for contacts and calendars for Evolution
-Summary(pl.UTF-8):   Synchronizacja kontaktów i kalendarzy dla Evolution
+Summary(pl.UTF-8):	Synchronizacja kontaktów i kalendarzy dla Evolution
 Name:		syncevolution
 Version:	0.3
 Release:	0.1
