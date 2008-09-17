@@ -1,17 +1,16 @@
 Summary:	Synchronization for contacts and calendars for Evolution
 Summary(pl.UTF-8):	Synchronizacja kontaktów i kalendarzy dla Evolution
 Name:		syncevolution
-%define     _rc     pre1
-%define     _realver    0.7
-Version:	%{_realver}.%{_rc}
+Version:	0.8
 Release:	0.1
 License:	GPL
 Group:		Applications
-Source0:    http://dl.sourceforge.net/sync4jevolution/%{name}-%{_realver}-%{_rc}.tar.gz
-# Source0-md5:	18ac5328fe863d0ebc2dbc3719020bdf
+Source0:    	http://www.estamos.de/download/syncevolution/sources/%{name}-%{version}.tar.gz
+# Source0-md5:	0922da253c521038ba23e5f2c5972954
 URL:		http://www.estamos.de/projects/SyncML/SyncEvolution.html
 BuildRequires:	curl-devel
 BuildRequires:	evolution-data-server-devel
+BuildRequires:	readline-devel
 #BuildRequires:	funambol-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -22,7 +21,7 @@ Synchronization for contacts and calendars for Evolution.
 Synchronizacja kontaktów i kalendarzy dla Evolution.
 
 %prep
-%setup -q -n %{name}-%{_realver}-%{_rc}
+%setup -q 
 
 %build
 %configure
@@ -39,5 +38,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README etc/*.txt etc/funambol etc/scheduleworld
+%doc AUTHORS ChangeLog NEWS HACKING README INSTALL
 %attr(755,root,root) %{_bindir}/*
