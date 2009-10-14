@@ -1,13 +1,14 @@
 Summary:	Synchronization for contacts and calendars for Evolution
 Summary(pl.UTF-8):	Synchronizacja kontaktów i kalendarzy dla Evolution
 Name:		syncevolution
-Version:	0.8.1
-Release:	0.2
+Version:	0.9
+Release:	0.1
 License:	GPL v2+ + OpenSSL exception
 Group:		Applications
-Source0:	http://www.estamos.de/download/syncevolution/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	c2a38265fd0619a09e2f2154d37ba54f
+Source0:	http://downloads.syncevolution.org/syncevolution/sources/%{name}-%{version}.tar.gz
+# Source0-md5:	480529e14bc895035824f5d7cce71228
 URL:		http://www.estamos.de/projects/SyncML/SyncEvolution.html
+BuildRequires:	boost-devel >= 1.34
 BuildRequires:	curl-devel
 BuildRequires:	evolution-data-server-devel
 #BuildRequires:	funambol-devel - currently uses bundled copy
@@ -38,7 +39,6 @@ Synchronizacja kontaktów i kalendarzy dla Evolution.
 	--enable-ebook \
 	--enable-ecal \
 	--enable-file \
-	--enable-sqlite \
 	--enable-shared
 %{__make}
 
@@ -57,8 +57,19 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # COPYING contains additional notes
 %doc AUTHORS COPYING ChangeLog NEWS README
+%dir %{_sysconfdir}/default/syncevolution
+%dir %{_sysconfdir}/default/syncevolution/Funambol
+%{_sysconfdir}/default/syncevolution/Funambol/*
+%dir %{_sysconfdir}/default/syncevolution/ScheduleWorld
+%{_sysconfdir}/default/syncevolution/ScheduleWorld/*
 %attr(755,root,root) %{_bindir}/synccompare
 %attr(755,root,root) %{_bindir}/syncevolution
+%attr(755,root,root) %{_libdir}/libsmltk.so
+%attr(755,root,root) %{_libdir}/libsmltk.so.0
+%attr(755,root,root) %{_libdir}/libsmltk.so.0.1.0
+%attr(755,root,root) %{_libdir}/libsynthesis.so
+%attr(755,root,root) %{_libdir}/libsynthesis.so.0
+%attr(755,root,root) %{_libdir}/libsynthesis.so.0.1.0
 %dir %{_libdir}/syncevolution
 %attr(755,root,root) %{_libdir}/syncevolution/libsyncevolution.so
 %attr(755,root,root) %{_libdir}/syncevolution/libsyncevolution.so.0
