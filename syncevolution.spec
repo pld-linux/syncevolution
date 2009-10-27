@@ -14,7 +14,7 @@ BuildRequires:	evolution-data-server-devel
 #BuildRequires:	funambol-devel - currently uses bundled copy
 BuildRequires:	glib2-devel
 BuildRequires:	libstdc++-devel
-BuildRequires:	sqlite-devel
+BuildRequires:	sqlite3-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
