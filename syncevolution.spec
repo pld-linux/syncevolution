@@ -2,7 +2,7 @@ Summary:	Synchronization for contacts and calendars for Evolution
 Summary(pl.UTF-8):	Synchronizacja kontaktów i kalendarzy dla Evolution
 Name:		syncevolution
 Version:	0.9
-Release:	0.1
+Release:	1
 License:	GPL v2+ + OpenSSL exception
 Group:		Applications
 Source0:	http://downloads.syncevolution.org/syncevolution/sources/%{name}-%{version}.tar.gz
