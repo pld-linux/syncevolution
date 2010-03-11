@@ -1,12 +1,16 @@
+#
+# TODO:
+#    - a -devel and -static subpackages
+#
 Summary:	Synchronization for contacts and calendars for Evolution
 Summary(pl.UTF-8):	Synchronizacja kontaktów i kalendarzy dla Evolution
 Name:		syncevolution
-Version:	0.9
-Release:	1
+Version:	0.9.2
+Release:	0.1
 License:	GPL v2+ + OpenSSL exception
 Group:		Applications
 Source0:	http://downloads.syncevolution.org/syncevolution/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	480529e14bc895035824f5d7cce71228
+# Source0-md5:	7716078e849bb4a01f5908872b46f015
 URL:		http://www.estamos.de/projects/SyncML/SyncEvolution.html
 BuildRequires:	boost-devel >= 1.34
 BuildRequires:	curl-devel
@@ -48,7 +52,11 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/syncevolution/*.la
+rm -f $RPM_BUILD_ROOT%{_libdir}/syncevolution/backends/*.la
+rm -f $RPM_BUILD_ROOT%{_datadir}/syncevolution/templates/README
+rm -rf $RPM_BUILD_ROOT%{_docdir}/syncevolution
+
+%post -p /sbin/ldconfig
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -56,36 +64,16 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 # COPYING contains additional notes
-%doc AUTHORS COPYING ChangeLog NEWS README
-%dir %{_sysconfdir}/default/syncevolution
-%dir %{_sysconfdir}/default/syncevolution/Funambol
-%{_sysconfdir}/default/syncevolution/Funambol/*
-%dir %{_sysconfdir}/default/syncevolution/ScheduleWorld
-%{_sysconfdir}/default/syncevolution/ScheduleWorld/*
+%doc AUTHORS COPYING ChangeLog NEWS README test/README.*
+%dir %{_datadir}/syncevolution/templates
+%dir %{_datadir}/syncevolution/templates/Funambol
+%{_datadir}/syncevolution/templates/Funambol/*
+%dir %{_datadir}/syncevolution/templates/ScheduleWorld
+%{_datadir}/syncevolution/templates/ScheduleWorld/*
 %attr(755,root,root) %{_bindir}/synccompare
 %attr(755,root,root) %{_bindir}/syncevolution
-%attr(755,root,root) %{_libdir}/libsmltk.so
-%attr(755,root,root) %{_libdir}/libsmltk.so.0
-%attr(755,root,root) %{_libdir}/libsmltk.so.0.1.0
-%attr(755,root,root) %{_libdir}/libsynthesis.so
-%attr(755,root,root) %{_libdir}/libsynthesis.so.0
-%attr(755,root,root) %{_libdir}/libsynthesis.so.0.1.0
+%ghost  %{_libdir}/lib*.so.0
+%attr(755,root,root) %{_libdir}/lib*.so.0.*
 %dir %{_libdir}/syncevolution
-%attr(755,root,root) %{_libdir}/syncevolution/libsyncevolution.so
-%attr(755,root,root) %{_libdir}/syncevolution/libsyncevolution.so.0
-%attr(755,root,root) %{_libdir}/syncevolution/libsyncevolution.so.0.0.0
-%attr(755,root,root) %{_libdir}/syncevolution/syncaddressbook.so
-%attr(755,root,root) %{_libdir}/syncevolution/syncaddressbook.so.0
-%attr(755,root,root) %{_libdir}/syncevolution/syncaddressbook.so.0.0.0
-%attr(755,root,root) %{_libdir}/syncevolution/syncebook.so
-%attr(755,root,root) %{_libdir}/syncevolution/syncebook.so.0
-%attr(755,root,root) %{_libdir}/syncevolution/syncebook.so.0.0.0
-%attr(755,root,root) %{_libdir}/syncevolution/syncecal.so
-%attr(755,root,root) %{_libdir}/syncevolution/syncecal.so.0
-%attr(755,root,root) %{_libdir}/syncevolution/syncecal.so.0.0.0
-%attr(755,root,root) %{_libdir}/syncevolution/syncfile.so
-%attr(755,root,root) %{_libdir}/syncevolution/syncfile.so.0
-%attr(755,root,root) %{_libdir}/syncevolution/syncfile.so.0.0.0
-%attr(755,root,root) %{_libdir}/syncevolution/syncsqlite.so
-%attr(755,root,root) %{_libdir}/syncevolution/syncsqlite.so.0
-%attr(755,root,root) %{_libdir}/syncevolution/syncsqlite.so.0.0.0
+%dir %{_libdir}/syncevolution/backends
+%attr(755,root,root) %{_libdir}/syncevolution/backends/*.so
