@@ -1,12 +1,9 @@
 #
-# TODO:
-#    - a -devel and -static subpackages
-#
 Summary:	Synchronization for contacts and calendars for Evolution
 Summary(pl.UTF-8):	Synchronizacja kontaktów i kalendarzy dla Evolution
 Name:		syncevolution
 Version:	0.9.2
-Release:	0.1
+Release:	1
 License:	GPL v2+ + OpenSSL exception
 Group:		Applications
 Source0:	http://downloads.syncevolution.org/syncevolution/sources/%{name}-%{version}.tar.gz
@@ -19,6 +16,7 @@ BuildRequires:	evolution-data-server-devel
 BuildRequires:	glib2-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	sqlite3-devel
+Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -34,6 +32,40 @@ these platforms) executes the synchronization. The project 'Genesis'
 
 %description -l pl.UTF-8
 Synchronizacja kontaktów i kalendarzy dla Evolution.
+
+%package libs
+Summary:	Syncevolution libraries
+Summary(pl.UTF-8):	Biblioteki Syncevolution
+Group:		Libraries
+
+%description libs
+Syncevolution shared libraries.
+
+%description libs -l pl.UTF-8
+Biblioteki dzielone Syncevolution.
+
+%package static
+Summary:	Syncevolution static libs
+Summary(pl.UTF-8):	Biblioteki statyczne Syncevolution
+Group:		Libraries
+
+%description static
+Syncevolution static libraries.
+
+%description static -l pl.UTF-8
+Biblioteki statyczne Syncevolution.
+
+%package devel
+Summary:	Header files for Syncevolution libraries
+Summary(pl.UTF-8):	Pliki nagłówkowe bibliotek Syncevolution
+Group:		Development/Libraries
+Requires:	%{name}-libs = %{version}-%{release}
+
+%description devel
+Header files for Syncevolution libraries
+
+%description devel -l pl.UTF-8
+Pliki nagłówkowe bibliotek Syncevolution.
 
 %prep
 %setup -q
@@ -65,6 +97,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # COPYING contains additional notes
 %doc AUTHORS COPYING ChangeLog NEWS README test/README.*
+%dir %{_datadir}/syncevolution
 %dir %{_datadir}/syncevolution/templates
 %dir %{_datadir}/syncevolution/templates/Funambol
 %{_datadir}/syncevolution/templates/Funambol/*
@@ -72,8 +105,22 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/syncevolution/templates/ScheduleWorld/*
 %attr(755,root,root) %{_bindir}/synccompare
 %attr(755,root,root) %{_bindir}/syncevolution
-%ghost  %{_libdir}/lib*.so.0
+
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %ghost  %{_libdir}/lib*.so.0
 %attr(755,root,root) %{_libdir}/lib*.so.0.*
 %dir %{_libdir}/syncevolution
 %dir %{_libdir}/syncevolution/backends
 %attr(755,root,root) %{_libdir}/syncevolution/backends/*.so
+
+%files devel
+%defattr(644,root,root,755)
+%{_libdir}/lib*.la
+%{_libdir}/lib*.so
+%{_includedir}/*
+%{_pkgconfigdir}/*
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/lib*.a
