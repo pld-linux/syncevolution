@@ -15,9 +15,12 @@ BuildRequires:	evolution-data-server-devel
 #BuildRequires:	funambol-devel - currently uses bundled copy
 BuildRequires:	glib2-devel
 BuildRequires:	libstdc++-devel
+BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define	specflags	-fPIC
 
 %description
 SyncEvolution synchronizes personal information management (PIM) data
