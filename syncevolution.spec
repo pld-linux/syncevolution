@@ -2,18 +2,21 @@
 Summary:	Synchronization for contacts and calendars for Evolution
 Summary(pl.UTF-8):	Synchronizacja kontaktów i kalendarzy dla Evolution
 Name:		syncevolution
-Version:	0.9.2
+Version:	1.0.1
 Release:	1
 License:	GPL v2+ + OpenSSL exception
 Group:		Applications
 Source0:	http://downloads.syncevolution.org/syncevolution/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	7716078e849bb4a01f5908872b46f015
+# Source0-md5:	93755ff284fbd089ffdfc547e5d51221
 URL:		http://www.estamos.de/projects/SyncML/SyncEvolution.html
 BuildRequires:	boost-devel >= 1.34
 BuildRequires:	curl-devel
 BuildRequires:	evolution-data-server-devel
 #BuildRequires:	funambol-devel - currently uses bundled copy
 BuildRequires:	glib2-devel
+BuildRequires:	libsoup-gnome-devel
+BuildRequires:	libgdata-devel
+BuildRequires:	libproxy-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel
@@ -74,11 +77,7 @@ Pliki nagłówkowe bibliotek Syncevolution.
 %setup -q
 
 %build
-%configure \
-	--enable-ebook \
-	--enable-ecal \
-	--enable-file \
-	--enable-shared
+%configure  --enable-evolution-compatibility
 %{__make}
 
 %install
@@ -102,12 +101,25 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog NEWS README test/README.*
 %dir %{_datadir}/syncevolution
 %dir %{_datadir}/syncevolution/templates
-%dir %{_datadir}/syncevolution/templates/Funambol
-%{_datadir}/syncevolution/templates/Funambol/*
-%dir %{_datadir}/syncevolution/templates/ScheduleWorld
-%{_datadir}/syncevolution/templates/ScheduleWorld/*
+%dir %{_datadir}/syncevolution/templates/clients
+%{_datadir}/syncevolution/templates/clients/*
+%dir %{_datadir}/syncevolution/templates/servers
+%{_datadir}/syncevolution/templates/servers/*
+%dir %{_datadir}/syncevolution/xml
+%dir %{_datadir}/syncevolution/xml/*
+%dir %{_datadir}/syncevolution/xml/datatypes
+%{_datadir}/syncevolution/xml/datatypes/*
+%dir %{_datadir}/syncevolution/xml/debug
+%{_datadir}/syncevolution/xml/debug/*
+%dir %{_datadir}/syncevolution/xml/remoterules
+%{_datadir}/syncevolution/xml/remoterules/*
+%dir %{_datadir}/syncevolution/xml/remoterules/server
+%{_datadir}/syncevolution/xml/remoterules/server/*
+%dir %{_datadir}/syncevolution/xml/scripting
+%{_datadir}/syncevolution/xml/scripting/*
 %attr(755,root,root) %{_bindir}/synccompare
 %attr(755,root,root) %{_bindir}/syncevolution
+%attr(755,root,root) %{_bindir}/syncevo-phone-config
 
 %files libs
 %defattr(644,root,root,755)
