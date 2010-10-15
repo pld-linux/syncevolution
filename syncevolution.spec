@@ -7,7 +7,7 @@ Release:	1
 License:	GPL v2+ + OpenSSL exception
 Group:		Applications
 Source0:	http://downloads.syncevolution.org/syncevolution/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	93755ff284fbd089ffdfc547e5d51221
+# Source0-md5:	e8cc1293ea3b9beea501333fdba8cb7a
 URL:		http://www.estamos.de/projects/SyncML/SyncEvolution.html
 BuildRequires:	boost-devel >= 1.34
 BuildRequires:	curl-devel
