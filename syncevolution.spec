@@ -140,6 +140,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/synccompare
 %attr(755,root,root) %{_bindir}/syncevolution
 %attr(755,root,root) %{_bindir}/syncevo-phone-config
+%{_mandir}/man1/*.1*
 
 %files libs
 %defattr(644,root,root,755)
