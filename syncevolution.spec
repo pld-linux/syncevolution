@@ -3,11 +3,12 @@ Summary:	Synchronization for contacts and calendars for Evolution
 Summary(pl.UTF-8):	Synchronizacja kontaktów i kalendarzy dla Evolution
 Name:		syncevolution
 Version:	1.0.1
-Release:	1
+Release:	2
 License:	GPL v2+ + OpenSSL exception
 Group:		Applications
 Source0:	http://downloads.syncevolution.org/syncevolution/sources/%{name}-%{version}.tar.gz
 # Source0-md5:	e8cc1293ea3b9beea501333fdba8cb7a
+Patch0:		%{name}-link.patch
 URL:		http://www.estamos.de/projects/SyncML/SyncEvolution.html
 BuildRequires:	boost-devel >= 1.34
 BuildRequires:	curl-devel
@@ -75,9 +76,25 @@ Pliki nagłówkowe bibliotek Syncevolution.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-%configure  --enable-evolution-compatibility
+%{__libtoolize}
+%{__aclocal} -I m4 -I m4-repo
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+cd src/synthesis
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+cd ../..
+%configure \
+	--enable-shared \
+	--enable-evolution-compatibility
+
 %{__make}
 
 %install
@@ -106,13 +123,16 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/syncevolution/templates/servers
 %{_datadir}/syncevolution/templates/servers/*
 %dir %{_datadir}/syncevolution/xml
-%dir %{_datadir}/syncevolution/xml/*
+%{_datadir}/syncevolution/xml/*.xml
+%attr(755,root,root) %{_datadir}/syncevolution/xml/*.pl
 %dir %{_datadir}/syncevolution/xml/datatypes
 %{_datadir}/syncevolution/xml/datatypes/*
 %dir %{_datadir}/syncevolution/xml/debug
 %{_datadir}/syncevolution/xml/debug/*
 %dir %{_datadir}/syncevolution/xml/remoterules
-%{_datadir}/syncevolution/xml/remoterules/*
+%{_datadir}/syncevolution/xml/remoterules/*.xml
+%dir %{_datadir}/syncevolution/xml/remoterules/client
+%{_datadir}/syncevolution/xml/remoterules/client/*
 %dir %{_datadir}/syncevolution/xml/remoterules/server
 %{_datadir}/syncevolution/xml/remoterules/server/*
 %dir %{_datadir}/syncevolution/xml/scripting

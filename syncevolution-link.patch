@@ -1,0 +1,40 @@
+--- syncevolution-1.0.1/src/synthesis/src/Makefile.am~	2010-07-16 22:13:33.000000000 +0200
++++ syncevolution-1.0.1/src/synthesis/src/Makefile.am	2010-10-21 14:26:44.252436380 +0200
+@@ -77,8 +77,8 @@
+ 	$(LIBICAL_CFLAGS) \
+ 	$(LIBECAL_CFLAGS)
+ libsynthesis_la_CXXFLAGS = $(libsynthesis_la_CFLAGS)
+-libsynthesis_la_LIBADD = $(PCRE_LIBS) $(SQLITE3_LIBS) $(XMLPARSE_LIBS) $(LIBICAL_LIBS) $(LIBECAL_LIBS) libsmltk.la -lz
+-libsynthesis_la_LDFLAGS = -version-info $(ENGINE_CURRENT):$(ENGINE_REVISION):$(ENGINE_AGE) \
++libsynthesis_la_LIBADD = $(PCRE_LIBS) $(SQLITE3_LIBS) $(XMLPARSE_LIBS) $(LIBICAL_LIBS) $(LIBECAL_LIBS) libsmltk.la -lz -ldl
++libsynthesis_la_LDFLAGS = -pthread -version-info $(ENGINE_CURRENT):$(ENGINE_REVISION):$(ENGINE_AGE) \
+ 	-Wl,--version-script=$(srcdir)/synthesis-linker.map
+ libsynthesis_la_DEPENDENCIES = $(srcdir)/synthesis-linker.map libsmltk.la
+ 
+@@ -180,4 +180,4 @@
+ if COND_DOXYGEN
+ all: doxygen
+ clean-local: clean-doxygen
+-endif
+\ No newline at end of file
++endif
+--- syncevolution-1.0.1/src/synthesis/src/Makefile.am.in~	2010-06-17 14:17:44.000000000 +0200
++++ syncevolution-1.0.1/src/synthesis/src/Makefile.am.in	2010-10-21 14:27:16.069436380 +0200
+@@ -77,8 +77,8 @@
+ 	$(LIBICAL_CFLAGS) \
+ 	$(LIBECAL_CFLAGS)
+ libsynthesis_la_CXXFLAGS = $(libsynthesis_la_CFLAGS)
+-libsynthesis_la_LIBADD = $(PCRE_LIBS) $(SQLITE3_LIBS) $(XMLPARSE_LIBS) $(LIBICAL_LIBS) $(LIBECAL_LIBS) libsmltk.la -lz
+-libsynthesis_la_LDFLAGS = -version-info $(ENGINE_CURRENT):$(ENGINE_REVISION):$(ENGINE_AGE) \
++libsynthesis_la_LIBADD = $(PCRE_LIBS) $(SQLITE3_LIBS) $(XMLPARSE_LIBS) $(LIBICAL_LIBS) $(LIBECAL_LIBS) libsmltk.la -lz -ldl
++libsynthesis_la_LDFLAGS = -pthread -version-info $(ENGINE_CURRENT):$(ENGINE_REVISION):$(ENGINE_AGE) \
+ 	-Wl,--version-script=$(srcdir)/synthesis-linker.map
+ libsynthesis_la_DEPENDENCIES = $(srcdir)/synthesis-linker.map libsmltk.la
+ 
+@@ -180,4 +180,4 @@
+ if COND_DOXYGEN
+ all: doxygen
+ clean-local: clean-doxygen
+-endif
+\ No newline at end of file
++endif
