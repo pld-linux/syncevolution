@@ -2,12 +2,12 @@
 Summary:	Synchronization for contacts and calendars for Evolution
 Summary(pl.UTF-8):	Synchronizacja kontaktów i kalendarzy dla Evolution
 Name:		syncevolution
-Version:	1.0.1
+Version:	1.1.1
 Release:	2
 License:	GPL v2+ + OpenSSL exception
 Group:		Applications
-Source0:	http://downloads.syncevolution.org/syncevolution/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	e8cc1293ea3b9beea501333fdba8cb7a
+Source0:	http://downloads.syncevolution.org/syncevolution/sources/%{name}-%{version}a.tar.gz
+# Source0-md5:	78f73c51e5f16283eb5cf3ed306ccb1f
 Patch0:		%{name}-link.patch
 URL:		http://www.estamos.de/projects/SyncML/SyncEvolution.html
 BuildRequires:	boost-devel >= 1.34
@@ -75,7 +75,7 @@ Header files for Syncevolution libraries
 Pliki nagłówkowe bibliotek Syncevolution.
 
 %prep
-%setup -q
+%setup -q 
 %patch0 -p1
 
 %build
@@ -140,7 +140,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/synccompare
 %attr(755,root,root) %{_bindir}/syncevolution
 %attr(755,root,root) %{_bindir}/syncevo-phone-config
-%{_mandir}/man1/*.1*
 
 %files libs
 %defattr(644,root,root,755)
