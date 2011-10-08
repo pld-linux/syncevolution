@@ -12,6 +12,7 @@ Patch0:		%{name}-link.patch
 URL:		http://www.estamos.de/projects/SyncML/SyncEvolution.html
 BuildRequires:	boost-devel >= 1.34
 BuildRequires:	curl-devel
+BuildRequires:	docutils
 BuildRequires:	evolution-data-server-devel
 #BuildRequires:	funambol-devel - currently uses bundled copy
 BuildRequires:	glib2-devel
@@ -140,6 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/synccompare
 %attr(755,root,root) %{_bindir}/syncevolution
 %attr(755,root,root) %{_bindir}/syncevo-phone-config
+%{_mandir}/man1/*.1*
 
 %files libs
 %defattr(644,root,root,755)
